@@ -2,15 +2,18 @@
 
 Note: filling out this file is extremely important. If you don't describe your assignment here, we may not be able to give you points for things.
 
-- ** Name: ** 
-- ** GitHub ID: ** 
-- ** WiscID: **
+- ** Name: Kunlun Wang ** 
+- ** GitHub ID: kunlunW** 
+- ** WiscID: 907 809 8895 **
 
 See README-example.md in the examples directory for ideas on what we are looking for.
 
 ## Artist Statement
 
 Describe what you were trying to make:
+!! This is a partially finish project for progress check !! 
+
+I am trying to make a eco-town with mountains, forests, and rivers. 
 
 ## Straightforward Checks
 
@@ -19,28 +22,28 @@ Please list how your assignment fills the requirements. In cases where you have 
 Note: the other checks we can see easily.
 
 2. 2 different kinds of objects that you made (just list 2)
-    1.
-    2.
+    1. Cars 
+    2. Houses 
 
 3.  5 different kinds of objects beyond #2. (just list 5)
-    1.
-    2.
-    3.
-    4.
-    5.
+    1. trees 
+    2. mountains (to be done)
+    3. reflective ball 
+    4. river (to be done)
+    5. train (to be done)
 
 5. 3 different behaviors. (just list 3)
-    1.
-    2.
-    3.
+    1. flying drone 
+    2. train running 
+    3. river flowing 
 
 6. At least 3 objects must be "rideable"
-    1.
-    2.
-    3.
+    1. car 
+    2. train 
+    3. drone 
 
 7. "train track" with a "train" (tell us how we know its a spline)
-    1. 
+    1. (to be done)
 
 8. One object from each category
     - buildings:
@@ -78,6 +81,7 @@ List the pictures that you made with a brief description
 
 ## Other Notes to the Graders
 
+I didn't fill out everything because I'm still working on it. 
 ## Attributions (including self-attributions)
 
 ## Consent
