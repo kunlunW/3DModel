@@ -46,28 +46,31 @@ Note: the other checks we can see easily.
     1. (to be done)
 
 8. One object from each category
-    - buildings:
-    - natural elements:
-    - vehicles:
+    - buildings: Planning on building some houses, skyscapers, some churches, and so on
+    - natural elements: mountains, trees
+    - vehicles: bus, truck, cars
 
 9. There is at least one model loaded from a file. (e.g. loading a `.obj` or `.fbx` file)
-    1. 
+    1. I'm planning on loading some grass/tree/mountain model (using .obj)
 
 10. There is at least one shader that you wrote.
-    - what object is it on:
-    - describe:
-    - filename:
+    - what object is it on: I'm planning on using shader for grass
+    - describe: to be done 
+    - filename: to be done 
 
 12. SkyBox or some other texture (list one - and say why you didn't have skybox if you don't have one)
-    1.
+    1. I used a sunny mountain skubox 
 
 ## Complexity Points
 
 Describe each thing that you did that you think is worth complexity points.
+(to be done)
 
 If possible, order them from most interesting to least interesting.
+(to be done)
 
 Describe what the thing is, where we can see it, and why it deserves complexity points.
+(to be done)
 
 Note: put "####" (4 hash marks) and number the complex things to make it easier for us to identify them, but put the description on a separate line. We've given you the first 2 headers
 
@@ -86,6 +89,7 @@ I didn't fill out everything because I'm still working on it. I built the road s
 
 ## Attributions (including self-attributions)
 
+to be done.
 ## Consent
 
 The student consents to having their assignment shown in Galleries and Peer Review.
