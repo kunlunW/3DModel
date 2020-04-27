@@ -77,6 +77,7 @@ Note: put "####" (4 hash marks) and number the complex things to make it easier 
 
 ## Screenshots
 
+(you can find the screen shot of my first submission April 26th in the pcitures folder)
 List the pictures that you made with a brief description
 
 ## Other Notes to the Graders
