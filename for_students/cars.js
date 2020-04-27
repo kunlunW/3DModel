@@ -27,54 +27,57 @@ export class GrTruck extends GrObject {
         let sgeom = new T.BoxGeometry( 0.3, 0.4, 0.1 );
         let side1win = new T.Mesh(sgeom, win_mat);
         let side2_window = new T.Mesh(sgeom, win_mat);
-        let frontboard_geom = new T.BoxGeometry( 0.4, 0.4, 0.6 );
+        let fbgeom = new T.BoxGeometry( 0.4, 0.4, 0.6 );
 		let frontboard_mat = new T.MeshStandardMaterial({color:"white",metalness:0.5, roughness:0.2});
-        let frontboard = new T.Mesh(frontboard_geom, frontboard_mat);
-        let ear_geom = new T.BoxGeometry( 0.1, 0.3, 0.2 );
-		let ear_mat = new T.MeshStandardMaterial({color:"white", metalness:0.8, roughness:0.2});
-        let ear1 = new T.Mesh(ear_geom, ear_mat);
-        let ear2 = new T.Mesh(ear_geom, ear_mat);
+        let frontboard = new T.Mesh(fbgeom, frontboard_mat);
+        let egeom = new T.BoxGeometry( 0.1, 0.3, 0.2 );
+		let emat = new T.MeshStandardMaterial({color:"white", metalness:0.8, roughness:0.2});
+        let e1 = new T.Mesh(egeom, emat);
+        let e2 = new T.Mesh(egeom, emat);
+
         frontboard.translateY(-0.25);
         frontboard.translateX(-0.26);
         side1win.translateZ(0.36);
         side2_window.translateZ(-0.36);
-        ear1.translateZ(0.4);
-        ear2.translateZ(-0.4);
-        ear1.translateX(0.24);
-        ear2.translateX(0.24);
-        ear1.translateY(0.1);
-        ear2.translateY(0.1);
+        e1.translateZ(0.4);
+        e2.translateZ(-0.4);
+        e1.translateX(0.24);
+        e2.translateX(0.24);
+        e1.translateY(0.1);
+        e2.translateY(0.1);
         side1win.translateY(0.1);
         side2_window.translateY(0.1);
         fwindow.translateX(0.26);
         fwindow.translateY(0.1);
-        frontg.add(front,frontboard,fwindow,side1win,side2_window,ear1,ear2);
+        frontg.add(front,frontboard,fwindow,side1win,side2_window,e1,e2);
         frontg.translateY(0.4);
         frontg.translateX(0.5);
         truck.add(frontg);
 
-        let cargo_geom = new T.BoxGeometry( 2.3, 1.1, 1 );
-        let cargo_mat = new T.MeshStandardMaterial({color:"green", metalness:0.7, roughness:0.4});
-        let cargo = new T.Mesh(cargo_geom, cargo_mat);
-        cargo.translateY(0.5);
-        cargo.translateX(-1.1);
-        truck.add(cargo);
+        let cgeom = new T.BoxGeometry( 2.3, 1.1, 1 );
+        let cmat = new T.MeshStandardMaterial({color:"green", metalness:0.7, roughness:0.4});
+        let c = new T.Mesh(cgeom, cmat);
+        c.translateY(0.5);
+        c.translateX(-1.1);
+        truck.add(c);
 
-        let wheel_geom = new T.CylinderGeometry( 0.2, 0.2, 1.2, 32 );
-        let wheel_mat = new T.MeshStandardMaterial({color:"black", metalness:0.9, roughness:0.8});
-        let wheel1 = new T.Mesh(wheel_geom, wheel_mat);
-        let wheel2 = new T.Mesh(wheel_geom, wheel_mat);
-        let wheel3 = new T.Mesh(wheel_geom, wheel_mat);
-        let wheel4 = new T.Mesh(wheel_geom, wheel_mat);
-        wheel1.rotateX(Math.PI/2);
-        wheel2.rotateX(Math.PI/2);
-        wheel3.rotateX(Math.PI/2);
-        wheel4.rotateX(Math.PI/2);
-        wheel1.translateX(-1.6);
-        wheel2.translateX(-1.1);
-        wheel3.translateX(-0.3);
-        wheel4.translateX(0.2);
-        truck.add(wheel1,wheel2,wheel3,wheel4);
+        let wgeom = new T.CylinderGeometry( 0.2, 0.2, 1.2, 32 );
+        let wmat = new T.MeshStandardMaterial({color:"black", metalness:0.9, roughness:0.8});
+        let w1 = new T.Mesh(wgeom, wmat);
+        let w2 = new T.Mesh(wgeom, wmat);
+        let w3 = new T.Mesh(wgeom, wmat);
+        let w4 = new T.Mesh(wgeom, wmat);
+        w1.rotateX(Math.PI/2);
+        w2.rotateX(Math.PI/2);
+        w3.rotateX(Math.PI/2);
+        w4.rotateX(Math.PI/2);
+        w1.translateX(-1.6);
+        w2.translateX(-1.1);
+        w3.translateX(-0.3);
+        w4.translateX(0.2);
+        truck.add(w1,w2,w3,w4);
+
+
         truck.translateY(0.2);
         truck.scale.set(1.5,1.5,1.5);
         super(`Truck`,truck);
@@ -90,60 +93,19 @@ export class GrTruck extends GrObject {
         this.z = -world_size/5 + road_size/4;
     }
 
-    advance(delta,timeOfDay) {
-        let v = delta/70;
-        switch(this.state) {
-            case 0:  
-                this.truck.translateX(v);
-                this.z -= v;
-                if(this.z <= -world_size/5 + road_size/4){
-                    this.state = 1;
-                    this.truck.rotateY(Math.PI/2);
-                }
-                break;
-            case 1:
-                this.truck.translateX(v);
-                this.x += v;
-                if(this.x >= world_size/5 - road_size/4){
-                    this.state = 2;
-                    this.truck.rotateY(Math.PI/2);
-                }
-                break;
-            case 2:
-                this.truck.translateX(v);
-                this.z += v;
-                if(this.z >= world_size/5 - road_size/4){
-                    this.state = 3;
-                    this.truck.rotateY(Math.PI/2);
-                }
-                break; 
-            case 3:
-                this.truck.translateX(v);
-                this.x -= v;
-                if(this.x <= -world_size/5 + road_size/3){
-                    this.state = 0;
-                    this.truck.rotateY(Math.PI/2);
-                }
-                break;   
-
-        }
-        
-        
-    }
-
 }
 
 export class GrBus1 extends GrObject {
     constructor() {
 		let bus = new T.Group();
         
-        let front_group = new T.Group();
-		let front_geom = new T.BoxGeometry( 3.5, 1, 0.8 );
-		let front_mat = new T.MeshStandardMaterial({color:"white", metalness:0.5, roughness:0.2});
-        let front = new T.Mesh(front_geom, front_mat);
-        let frontwin_geom = new T.BoxGeometry( 0.1, 0.5, 0.6 );
+        let fgroup = new T.Group();
+		let fgeom = new T.BoxGeometry( 3.5, 1, 0.8 );
+		let fmat = new T.MeshStandardMaterial({color:"white", metalness:0.5, roughness:0.2});
+        let front = new T.Mesh(fgeom, fmat);
+        let fwgeom = new T.BoxGeometry( 0.1, 0.5, 0.6 );
 		let win_mat = new T.MeshStandardMaterial({color:"black", metalness:0.5, roughness:0.2});
-        let front_window = new T.Mesh(frontwin_geom, win_mat);
+        let fwindow = new T.Mesh(fwgeom, win_mat);
         let sidewin_geom = new T.BoxGeometry( 0.5, 0.4, 0.1 );
         let side1_window = new T.Mesh(sidewin_geom, win_mat);
         let side2_window = new T.Mesh(sidewin_geom, win_mat);
@@ -180,13 +142,13 @@ export class GrBus1 extends GrObject {
         ear2.translateX(1.6);
         ear1.translateY(0.1);
         ear2.translateY(0.1);
-        front_window.translateX(1.71);
-        front_window.translateY(0.1);
+        fwindow.translateX(1.71);
+        fwindow.translateY(0.1);
         sidewindows.add(side1_window,side2_window,side3_window,side4_window,side5_window,side6_window,side7_window,side8_window);
-        front_group.add(front,front_window,ear1,ear2,sidewindows);
+        fgroup.add(front,fwindow,ear1,ear2,sidewindows);
         sidewindows.translateY(0.1);
-        front_group.translateY(0.4);
-        bus.add(front_group);
+        fgroup.translateY(0.4);
+        bus.add(fgroup);
 
         let wheel_geom = new T.CylinderGeometry( 0.2, 0.2, 1, 32 );
         let wheel_mat = new T.MeshStandardMaterial({color:"black", metalness:0.3, roughness:0.8});
@@ -218,46 +180,7 @@ export class GrBus1 extends GrObject {
         this.z = world_size/5 + road_size/4;
     }
 
-    advance(delta,timeOfDay) {
-        let v2 = delta/80;
-        switch(this.state) {
-            case 0:  
-                this.truck.translateX(v2);
-                this.z += v2;
-                if(this.z >= world_size/5 + road_size/4){
-                    this.state = 1;
-                    this.truck.rotateY(-Math.PI/2);
-                }
-                break;
-            case 1:
-                this.truck.translateX(v2);
-                this.x -= v2;
-                if(this.x <= -world_size/5 - road_size/3){
-                    this.state = 2;
-                    this.truck.rotateY(-Math.PI/2);
-                }
-                break;
-            case 2:
-                this.truck.translateX(v2);
-                this.z -= v2;
-                if(this.z <= -world_size/5 - road_size/4){
-                    this.state = 3;
-                    this.truck.rotateY(-Math.PI/2);
-                }
-                break; 
-            case 3:
-                this.truck.translateX(v2);
-                this.x += v2;
-                if(this.x >= world_size/5 + road_size/4){
-                    this.state = 0;
-                    this.truck.rotateY(-Math.PI/2);
-                }
-                break;   
-
-        }
-        
-        
-    }
+   
 
 }
 
@@ -347,46 +270,7 @@ export class GrBus2 extends GrObject {
         this.z = -world_size/5 - road_size/4;
     }
 
-    advance(delta,timeOfDay) {
-        let v2 = delta/80;
-        switch(this.state) {
-            case 0:  
-                this.truck.translateX(v2);
-                this.z += v2;
-                if(this.z >= world_size/5 + road_size/4){
-                    this.state = 1;
-                    this.truck.rotateY(-Math.PI/2);
-                }
-                break;
-            case 1:
-                this.truck.translateX(v2);
-                this.x -= v2;
-                if(this.x <= -world_size/5 - road_size/3){
-                    this.state = 2;
-                    this.truck.rotateY(-Math.PI/2);
-                }
-                break;
-            case 2:
-                this.truck.translateX(v2);
-                this.z -= v2;
-                if(this.z <= -world_size/5 - road_size/4){
-                    this.state = 3;
-                    this.truck.rotateY(-Math.PI/2);
-                }
-                break; 
-            case 3:
-                this.truck.translateX(v2);
-                this.x += v2;
-                if(this.x >= world_size/5 + road_size/4){
-                    this.state = 0;
-                    this.truck.rotateY(-Math.PI/2);
-                }
-                break;   
-
-        }
-        
-        
-    }
+    
 
 }
 
@@ -503,46 +387,7 @@ export class GrCar1 extends GrObject {
         this.z = world_size/5 - road_size/4;
     }
 
-    advance(delta,timeOfDay) {
-        let v = delta/70;
-        switch(this.state) {
-            case 0:  
-                this.truck.translateX(v);
-                this.z -= v;
-                if(this.z <= -world_size/5 + road_size/4){
-                    this.state = 1;
-                    this.truck.rotateY(Math.PI/2);
-                }
-                break;
-            case 1:
-                this.truck.translateX(v);
-                this.x += v;
-                if(this.x >= world_size/5 - road_size/4){
-                    this.state = 2;
-                    this.truck.rotateY(Math.PI/2);
-                }
-                break;
-            case 2:
-                this.truck.translateX(v);
-                this.z += v;
-                if(this.z >= world_size/5 - road_size/4){
-                    this.state = 3;
-                    this.truck.rotateY(Math.PI/2);
-                }
-                break; 
-            case 3:
-                this.truck.translateX(v);
-                this.x -= v;
-                if(this.x <= -world_size/5 + road_size/3){
-                    this.state = 0;
-                    this.truck.rotateY(Math.PI/2);
-                }
-                break;   
-
-        }
-        
-        
-    }
+   
 
 }
 
@@ -656,49 +501,7 @@ export class GrCar2 extends GrObject {
         this.state = 3;
         this.x = 0;
         this.z = world_size/5 - road_size/4;
-    }
-
-    advance(delta,timeOfDay) {
-        let v = delta/70;
-        switch(this.state) {
-            case 0:  
-                this.truck.translateX(v);
-                this.z -= v;
-                if(this.z <= -world_size/5 + road_size/4){
-                    this.state = 1;
-                    this.truck.rotateY(Math.PI/2);
-                }
-                break;
-            case 1:
-                this.truck.translateX(v);
-                this.x += v;
-                if(this.x >= world_size/5 - road_size/4){
-                    this.state = 2;
-                    this.truck.rotateY(Math.PI/2);
-                }
-                break;
-            case 2:
-                this.truck.translateX(v);
-                this.z += v;
-                if(this.z >= world_size/5 - road_size/4){
-                    this.state = 3;
-                    this.truck.rotateY(Math.PI/2);
-                }
-                break; 
-            case 3:
-                this.truck.translateX(v);
-                this.x -= v;
-                if(this.x <= -world_size/5 + road_size/3){
-                    this.state = 0;
-                    this.truck.rotateY(Math.PI/2);
-                }
-                break;   
-
-        }
-        
-        
-        
-    }
+    }  
 
 }
 
