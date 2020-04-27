@@ -38,7 +38,7 @@ export class GrShiny extends GrObject {
         let flag = new T.Group();
         super("ShinySculpture", flag);
         this.world = world;
-        this.cubecam = new T.CubeCamera(radius*1.5, 100, 128);
+        this.cubecam = new T.CubeCamera(radius*1.05, 100, 128);
         this.sculptureGeom = new T.SphereBufferGeometry(radius, 100, 100);
         this.sculptureMaterial = new T.MeshStandardMaterial({
             color: "white",
@@ -63,10 +63,23 @@ export class GrShiny extends GrObject {
         // flag.add(screen);
         // screen.rotateY(Math.PI/2);
         // screen.translateY(2);
-        let base_geom = new T.BoxGeometry( 0.5, 2, 0.5 );
+        let base_geom = new T.BoxBufferGeometry( 0.5, 2, 0.5 );
 		let base_mat = new T.MeshStandardMaterial({color:"white", metalness:0.5, roughness:0.2});
         let pole = new T.Mesh(base_geom, base_mat);
         flag.add(pole);
+
+        this.mesh = new T.MeshStandardMaterial({
+            color: "white",
+            roughness: 0.2,
+            metalness: .7,
+            // @ts-ignore   // envMap has the wrong type
+            envMap: this.cubecam.renderTarget.texture,
+          });
+
+          this.cube = new T.Mesh(base_geom, this.mesh);
+
+          flag.add(this.cube);
+
         // flag.position.set(cam_x, 1, cam_z);
         // super(`Flag-${flagObCtr++}`,flag);
         // this.screen = screen;
