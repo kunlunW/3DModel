@@ -82,7 +82,8 @@ List the pictures that you made with a brief description
 
 ## Other Notes to the Graders
 
-I didn't fill out everything because I'm still working on it. 
+I didn't fill out everything because I'm still working on it. I built the road system, some cars, some trees, some houses, and a reflective ball. I will add more things to it as I continue working on this. 
+
 ## Attributions (including self-attributions)
 
 ## Consent
