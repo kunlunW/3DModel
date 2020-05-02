@@ -142,8 +142,11 @@ Description: There are 4 apt buildings in graphics town, and each has different 
 List the pictures that you made with a brief description
 
 ## Other Notes to the Graders
-
-The two OBJ objects I have in the graphics town make it very slow to load, and lagging. 
+Hi! There are a few things that I want to let you know: 
+1) The two OBJ objects I have in the graphics town make it very slow to load, and laggy. 
+2) For some reason, the textures and OBJ load very slowly on my computer, please wait a few second if you see building
+with no textures.
+3) If I run the graphics town, it will become very laggy, so I'd suggest you to unclick "run" if you want to examine things.
 
 ## Attributions (including self-attributions)
 
