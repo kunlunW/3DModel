@@ -8,24 +8,46 @@ import * as T from "../libs/CS559-THREE/build/three.module.js";
 import { GrObject } from "../libs/CS559-Framework/GrObject.js";
 import { GrWorld } from "../libs/CS559-Framework/GrWorld.js";
 
-let world_size = 90;
-
-export class GrRoad extends GrObject {
+let size = 95;
+export class GrAvenue extends GrObject {
     constructor() {
         let avenue = new T.Group();
-        
-        let geo1 = new T.BoxGeometry( world_size*0.8,0.02,4 );
-        let geo2 = new T.BoxGeometry( 3,0.05,world_size*0.8 );
-        let geomesh = new T.MeshStandardMaterial({color:"#A9A9A9", metalness:0.9, roughness:0.8});
+        let geo1 = new T.BoxGeometry( size*0.8,0.02,4 );
+        let geo2 = new T.BoxGeometry( 3,0.05,size*0.8 );
+        let geomesh = new T.MeshStandardMaterial({color:"#a6a6a6", metalness:0.5, roughness:0.8});
         let mesh1 = new T.Mesh(geo1, geomesh);
         let mesh2 = new T.Mesh(geo1, geomesh);
         let mesh3 = new T.Mesh(geo2, geomesh);
         let mesh4 = new T.Mesh(geo2, geomesh);
-        avenue.add(shift(mesh1 ,0,world_size/5));
-        avenue.add(shift(mesh2 ,0,-world_size/5));
-        avenue.add(shift(mesh3 ,world_size/5,0));
-        avenue.add(shift(mesh4 ,-world_size/5,0));
+        avenue.add(shift(mesh1 ,0,size/5));
+        avenue.add(shift(mesh2 ,0,-size/5));
+        avenue.add(shift(mesh3 ,size/5,0));
+        avenue.add(shift(mesh4 ,-size/5,0));
         super("Roads",avenue);
+    }
+}
+
+
+export class GrRoad2 extends GrObject {
+    constructor (length, id) {
+       let road;
+        
+        super("Road_" + id, road);
+    }
+}
+
+
+
+export class GrBridge extends GrObject {
+    constructor(){
+        let bridge = new T.Group();
+
+        let texture = new T.TextureLoader().load("./Pictures/metalPole.jpg")
+        let geo1 = new T.CylinderGeometry(0.5,0.5,14.7,100);
+        let material = new T.MeshStandardMaterial({map: texture, bumpMap: texture, roughnessMap: texture, metalnessMap: texture, refractionRatio: 1});
+        let mesh = new T.Mesh(geo1, material);
+        bridge.add(mesh);
+        super("Roads",bridge);
     }
 }
 
@@ -53,16 +75,6 @@ export class GrShiny extends GrObject {
         this.sculpture.rotateY(Math.PI/2);
         this.sculpture.translateY(3);
 
-
-        // let camera2 = new T.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-        // flag.add(camera2);
-        
-        // camera2.position.set(0,1,0); 
-        // var bufferTexture = new T.WebGLRenderTarget( 256, 256, { minFilter: T.LinearFilter, magFilter: T.NearestFilter});
-        // let screen = new T.Mesh(new T.SphereGeometry(1.5,50,50), new T.MeshStandardMaterial({map:bufferTexture.texture,}));
-        // flag.add(screen);
-        // screen.rotateY(Math.PI/2);
-        // screen.translateY(2);
         let base_geom = new T.BoxBufferGeometry( 0.5, 2, 0.5 );
 		let base_mat = new T.MeshStandardMaterial({color:"white", metalness:0.5, roughness:0.2});
         let pole = new T.Mesh(base_geom, base_mat);
@@ -80,23 +92,10 @@ export class GrShiny extends GrObject {
 
           flag.add(this.cube);
 
-        // flag.position.set(cam_x, 1, cam_z);
-        // super(`Flag-${flagObCtr++}`,flag);
-        // this.screen = screen;
-        // this.world = world;
-        // this.camera2 = camera2;
-        // this.bufferTexture = bufferTexture;
-        // this.flag = flag;
-        // this.cam_x = cam_x;
-        // this.cam_z = cam_z;
+  
           
     }
-    // advance(delta,timeOfDay) {
-    //     this.camera2.lookAt(-this.cam_x,0,-this.cam_z);
-    //     this.world.renderer.render(this.world.scene, this.camera2, this.bufferTexture);
-    //     this.screen.lookAt(this.world.camera.position);
-    // }
-
+    
     tick(delta, timeOfDay) {
         this.cubecam.update(this.world.renderer, this.world.scene);
       }
