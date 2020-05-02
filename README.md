@@ -157,7 +157,7 @@ with no textures.
 
 ## Attributions (including self-attributions)
 
-1. I used the example code to create a helicopter and helipad 
+1. I leanred and used the example code to create one of the helicopters and all the helipads.
 
 2. Texture I used: 
     a) https://www.pinterest.com/pin/483222234998859687/
