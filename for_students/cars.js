@@ -1,635 +1,705 @@
-/*jshint esversion: 6 */
-// @ts-check
 
-// these four lines fake out TypeScript into thinking that THREE
-// has the same type as the T.js module, so things work for type checking
-// type inferencing figures out that THREE has the same type as T
-// and then I have to use T (not THREE) to avoid the "UMD Module" warning
-
-
-// get things we need
 import * as T from "../libs/CS559-THREE/build/three.module.js";
 import { GrObject } from "../libs/CS559-Framework/GrObject.js";
 
-// let v = 0.3, v2 = 0.1;
-let world_size = 100;
-let road_size = 3.5;
+let s = 80;
+let rs = 3.5;
 export class GrTruck extends GrObject {
     constructor() {
-		let truck = new T.Group();
-        let frontg = new T.Group();
-		let fgeom = new T.BoxGeometry( 0.6, 0.9, 0.8 );
-		let fmat = new T.MeshStandardMaterial({color:"gold", metalness:0.5, roughness:0.9});
-        let front = new T.Mesh(fgeom, fmat);
-        let fwgeom = new T.BoxGeometry( 0.1, 0.4, 0.6 );
-		let win_mat = new T.MeshStandardMaterial({color:"white", metalness:0.3, roughness:0.2});
-        let fwindow = new T.Mesh(fwgeom, win_mat);
-        let sgeom = new T.BoxGeometry( 0.3, 0.4, 0.1 );
-        let side1win = new T.Mesh(sgeom, win_mat);
-        let side2_window = new T.Mesh(sgeom, win_mat);
-        let fbgeom = new T.BoxGeometry( 0.4, 0.4, 0.6 );
-		let frontboard_mat = new T.MeshStandardMaterial({color:"white",metalness:0.5, roughness:0.2});
-        let frontboard = new T.Mesh(fbgeom, frontboard_mat);
-        let egeom = new T.BoxGeometry( 0.1, 0.3, 0.2 );
-		let emat = new T.MeshStandardMaterial({color:"white", metalness:0.8, roughness:0.2});
-        let e1 = new T.Mesh(egeom, emat);
-        let e2 = new T.Mesh(egeom, emat);
+        let bigCar = new T.Group();
+        let fg = new T.Group();
+        let box = new T.BoxGeometry(0.61, 0.91, 0.81);
+        let mat = new T.MeshStandardMaterial({ color: "gold", metalness: 0.5, roughness: 0.9 });
+        let fmesh = new T.Mesh(box, mat);
+        let fwg = new T.BoxGeometry(0.11, 0.41, 0.61);
+        let wm = new T.MeshStandardMaterial({ color: "white", metalness: 0.3, roughness: 0.2 });
+        let fw = new T.Mesh(fwg, wm);
+        let sm = new T.BoxGeometry(0.31, 0.41, 0.11);
+        let sw = new T.Mesh(sm, wm);
+        let mesh2 = new T.Mesh(sm, wm);
+        let fbm = new T.BoxGeometry(0.41, 0.41, 0.61);
+        let ft = new T.MeshStandardMaterial({ color: "white", metalness: 0.5, roughness: 0.2 });
+        let fd = new T.Mesh(fbm, ft);
+        let em = new T.BoxGeometry(0.11, 0.31, 0.21);
+        let emat = new T.MeshStandardMaterial({ color: "white", metalness: 0.8, roughness: 0.2 });
+        let m1 = new T.Mesh(em, emat);
+        let m2 = new T.Mesh(em, emat);
+        fd.translateY(-0.255);
+        fd.translateX(-0.265);
+        sw.translateZ(0.365);
+        mesh2.translateZ(-0.365);
+        m1.translateZ(0.45);
+        m2.translateZ(-0.45);
+        m1.translateX(0.245);
+        m2.translateX(0.245);
+        m1.translateY(0.15);
+        m2.translateY(0.15);
+        sw.translateY(0.15);
+        mesh2.translateY(0.15);
+        fw.translateX(0.265);
+        fw.translateY(0.15);
+        fg.add(fmesh, fd, fw, sw, mesh2, m1, m2);
+        fg.translateY(0.45);
+        fg.translateX(0.55);
+        bigCar.add(fg);
+        let cm = new T.BoxGeometry(2.31, 1.11, 1.1);
+        let cmat = new T.MeshStandardMaterial({ color: "green", metalness: 0.6, roughness: 0.5 });
+        let c = new T.Mesh(cm, cmat);
+        c.translateY(0.51);
+        c.translateX(-1.11);
+        bigCar.add(c);
 
-        frontboard.translateY(-0.25);
-        frontboard.translateX(-0.26);
-        side1win.translateZ(0.36);
-        side2_window.translateZ(-0.36);
-        e1.translateZ(0.4);
-        e2.translateZ(-0.4);
-        e1.translateX(0.24);
-        e2.translateX(0.24);
-        e1.translateY(0.1);
-        e2.translateY(0.1);
-        side1win.translateY(0.1);
-        side2_window.translateY(0.1);
-        fwindow.translateX(0.26);
-        fwindow.translateY(0.1);
-        frontg.add(front,frontboard,fwindow,side1win,side2_window,e1,e2);
-        frontg.translateY(0.4);
-        frontg.translateX(0.5);
-        truck.add(frontg);
-
-        let cgeom = new T.BoxGeometry( 2.3, 1.1, 1 );
-        let cmat = new T.MeshStandardMaterial({color:"green", metalness:0.7, roughness:0.4});
-        let c = new T.Mesh(cgeom, cmat);
-        c.translateY(0.5);
-        c.translateX(-1.1);
-        truck.add(c);
-
-        let wgeom = new T.CylinderGeometry( 0.2, 0.2, 1.2, 32 );
-        let wmat = new T.MeshStandardMaterial({color:"black", metalness:0.9, roughness:0.8});
+        let wgeom = new T.CylinderGeometry(0.21, 0.21, 1.21, 32);
+        let wmat = new T.MeshStandardMaterial({ color: "black", metalness: 0.9, roughness: 0.8 });
         let w1 = new T.Mesh(wgeom, wmat);
         let w2 = new T.Mesh(wgeom, wmat);
         let w3 = new T.Mesh(wgeom, wmat);
         let w4 = new T.Mesh(wgeom, wmat);
-        w1.rotateX(Math.PI/2);
-        w2.rotateX(Math.PI/2);
-        w3.rotateX(Math.PI/2);
-        w4.rotateX(Math.PI/2);
-        w1.translateX(-1.6);
-        w2.translateX(-1.1);
-        w3.translateX(-0.3);
-        w4.translateX(0.2);
-        truck.add(w1,w2,w3,w4);
+        w1.rotateX(Math.PI / 2);
+        w2.rotateX(Math.PI / 2);
+        w3.rotateX(Math.PI / 2);
+        w4.rotateX(Math.PI / 2);
+        w1.translateX(-1.61);
+        w2.translateX(-1.11);
+        w3.translateX(-0.31);
+        w4.translateX(0.21);
+        bigCar.add(w1, w2, w3, w4);
+
+        bigCar.translateY(0.21);
+        bigCar.scale.set(1.52, 1.52, 1.52);
+        super(`Truck`, bigCar);
+        this.bigCar = bigCar;
+
+        bigCar.position.x = s / 5 - rs / 4;
+        bigCar.position.z = -s / 5 + rs / 4 - 4;
+        this.turn = 0;
+        this.x = s / 5 - rs / 4;
+        this.z = -s / 5 + rs / 4;
+        this.ridePoint = new T.Object3D();
+        this.ridePoint.translateY(2);
+        this.ridePoint.rotateY(Math.PI / 2);
+        this.objects[0].add(this.ridePoint);
+        this.rideable = this.ridePoint;
 
 
-        truck.translateY(0.2);
-        truck.scale.set(1.5,1.5,1.5);
-        super(`Truck`,truck);
-        this.truck = truck;
-        // truck.position.x = 10;
-        // truck.position.z = 20
-        truck.position.x = world_size/5 - road_size/4;
-        truck.position.z = -world_size/5 + road_size/4;
-        this.state = 0;
-        // this.x = 2;
-        // this.z = 10;
-        this.x = world_size/5 - road_size/4;
-        this.z = -world_size/5 + road_size/4;
+    }
+
+    tick(time, timeOfDay) {
+        let run = time / 60;
+        switch (this.turn) {
+            case 0:
+                this.bigCar.translateX(run);
+                this.z -= run;
+                if (this.z <= -s / 5 + rs / 4) {
+                    this.turn = 1;
+                    this.bigCar.rotateY(Math.PI / 2);
+                }
+                break;
+            case 1:
+                this.bigCar.translateX(run);
+                this.x += run;
+                if (this.x >= s / 5 - rs / 4) {
+                    this.turn = 2;
+                    this.bigCar.rotateY(Math.PI / 2);
+                }
+                break;
+            case 2:
+                this.bigCar.translateX(run);
+                this.z += run;
+                if (this.z >= s / 5 - rs / 4) {
+                    this.turn = 3;
+                    this.bigCar.rotateY(Math.PI / 2);
+                }
+                break;
+            case 3:
+                this.bigCar.translateX(run);
+                this.x -= run;
+                if (this.x <= -s / 5 + rs / 3) {
+                    this.turn = 0;
+                    this.bigCar.rotateY(Math.PI / 2);
+                }
+                break;
+
+        }
+
+
     }
 
 }
 
 export class GrBus1 extends GrObject {
     constructor() {
-		let bus = new T.Group();
-        
-        let fgroup = new T.Group();
-		let fgeom = new T.BoxGeometry( 3.5, 1, 0.8 );
-		let fmat = new T.MeshStandardMaterial({color:"white", metalness:0.5, roughness:0.2});
-        let front = new T.Mesh(fgeom, fmat);
-        let fwgeom = new T.BoxGeometry( 0.1, 0.5, 0.6 );
-		let win_mat = new T.MeshStandardMaterial({color:"black", metalness:0.5, roughness:0.2});
-        let fwindow = new T.Mesh(fwgeom, win_mat);
-        let sidewin_geom = new T.BoxGeometry( 0.5, 0.4, 0.1 );
-        let side1_window = new T.Mesh(sidewin_geom, win_mat);
-        let side2_window = new T.Mesh(sidewin_geom, win_mat);
-        let side3_window = new T.Mesh(sidewin_geom, win_mat);
-        let side4_window = new T.Mesh(sidewin_geom, win_mat);
-        let side5_window = new T.Mesh(sidewin_geom, win_mat);
-        let side6_window = new T.Mesh(sidewin_geom, win_mat);
-        let side7_window = new T.Mesh(sidewin_geom, win_mat);
-        let side8_window = new T.Mesh(sidewin_geom, win_mat);
-        let ear_geom = new T.BoxGeometry( 0.1, 0.3, 0.2 );
-		let ear_mat = new T.MeshStandardMaterial({color:"white", metalness:0.3, roughness:0.2});
-        let ear1 = new T.Mesh(ear_geom, ear_mat);
-        let ear2 = new T.Mesh(ear_geom, ear_mat);
-        let sidewindows = new T.Group();
-        side1_window.translateZ(0.36);
-        side2_window.translateZ(-0.36);
-        side3_window.translateZ(0.36);
-        side4_window.translateZ(-0.36);
-        side5_window.translateZ(0.36);
-        side6_window.translateZ(-0.36);
-        side7_window.translateZ(0.36);
-        side8_window.translateZ(-0.36);
-        side1_window.translateX(-0.2);
-        side2_window.translateX(-0.2);
-        side3_window.translateX(0.5);
-        side4_window.translateX(0.5);
-        side5_window.translateX(1.1);
-        side6_window.translateX(1.1);
-        side7_window.translateX(-0.8);
-        side8_window.translateX(-0.8);
-        ear1.translateZ(0.4);
-        ear2.translateZ(-0.4);
-        ear1.translateX(1.6);
-        ear2.translateX(1.6);
-        ear1.translateY(0.1);
-        ear2.translateY(0.1);
-        fwindow.translateX(1.71);
-        fwindow.translateY(0.1);
-        sidewindows.add(side1_window,side2_window,side3_window,side4_window,side5_window,side6_window,side7_window,side8_window);
-        fgroup.add(front,fwindow,ear1,ear2,sidewindows);
-        sidewindows.translateY(0.1);
-        fgroup.translateY(0.4);
-        bus.add(fgroup);
+        let bus = new T.Group();
 
-        let wheel_geom = new T.CylinderGeometry( 0.2, 0.2, 1, 32 );
-        let wheel_mat = new T.MeshStandardMaterial({color:"black", metalness:0.3, roughness:0.8});
-        let wheel1 = new T.Mesh(wheel_geom, wheel_mat);
-        let wheel2 = new T.Mesh(wheel_geom, wheel_mat);
-        let wheel3 = new T.Mesh(wheel_geom, wheel_mat);
-        let wheel4 = new T.Mesh(wheel_geom, wheel_mat);
-        wheel1.rotateX(Math.PI/2);
-        wheel2.rotateX(Math.PI/2);
-        wheel3.rotateX(Math.PI/2);
-        wheel4.rotateX(Math.PI/2);
-        wheel1.translateX(1.2);
-        wheel2.translateX(0.5);
-        wheel3.translateX(-0.5);
-        wheel4.translateX(-1.2);
-        bus.add(wheel1,wheel2,wheel3,wheel4);
+        let fp = new T.Group();
+        let box = new T.BoxGeometry(3.52, 1.2, 0.82);
+        let mat = new T.MeshStandardMaterial({ color: "white", metalness: 0.55, roughness: 0.2 });
+        let fmesh = new T.Mesh(box, mat);
+        let fwg = new T.BoxGeometry(0.12, 0.52, 0.62);
+        let wm = new T.MeshStandardMaterial({ color: "black", metalness: 0.55, roughness: 0.2 });
+        let fw = new T.Mesh(fwg, wm);
+        let geo2 = new T.BoxGeometry(0.52, 0.42, 0.12);
+        let comb2 = new T.Mesh(geo2, wm);
+        let mesh2 = new T.Mesh(geo2, wm);
+        let s3 = new T.Mesh(geo2, wm);
+        let s4 = new T.Mesh(geo2, wm);
+        let s5 = new T.Mesh(geo2, wm);
+        let s6 = new T.Mesh(geo2, wm);
+        let s7 = new T.Mesh(geo2, wm);
+        let s8 = new T.Mesh(geo2, wm);
+        let box3 = new T.BoxGeometry(0.12, 0.32, 0.22);
+        let mesh3 = new T.MeshStandardMaterial({ color: "white", metalness: 0.3, roughness: 0.2 });
+        let e1 = new T.Mesh(box3, mesh3);
+        let e2 = new T.Mesh(box3, mesh3);
+        let newG = new T.Group();
+        comb2.translateZ(0.362);
+        mesh2.translateZ(-0.362);
+        s3.translateZ(0.362);
+        s4.translateZ(-0.362);
+        s5.translateZ(0.362);
+        s6.translateZ(-0.362);
+        s7.translateZ(0.362);
+        s8.translateZ(-0.362);
+        comb2.translateX(-0.22);
+        mesh2.translateX(-0.22);
+        s3.translateX(0.52);
+        s4.translateX(0.52);
+        s5.translateX(1.12);
+        s6.translateX(1.12);
+        s7.translateX(-0.82);
+        s8.translateX(-0.82);
+        e1.translateZ(0.42);
+        e2.translateZ(-0.42);
+        e1.translateX(1.62);
+        e2.translateX(1.62);
+        e1.translateY(0.12);
+        e2.translateY(0.12);
+        fw.translateX(1.712);
+        fw.translateY(0.12);
 
-        bus.translateY(0.2);
+        newG.add(comb2, mesh2, s3, s4, s5, s6, s7, s8);
+        fp.add(fmesh, fw, e1, e2, newG);
+        newG.translateY(0.1);
+        fp.translateY(0.4);
+        bus.add(fp);
 
-        // bus.translateZ(-1);
-        // bus.translateX(-2);
-        super(`Blue Bus`,bus);
-        this.truck = bus;
-        bus.scale.set(1.5,1.5,1.5);
-        bus.position.x = world_size/10 + road_size/4 ;
-        bus.position.z = world_size/5 + road_size/4;
-        this.state = 3;
-        this.x = world_size/5 + road_size/4;
-        this.z = world_size/5 + road_size/4;
+        let tire = new T.CylinderGeometry(0.2, 0.2, 1, 32);
+        let tireMat = new T.MeshStandardMaterial({ color: "black", metalness: 0.3, roughness: 0.8 });
+        let t1 = new T.Mesh(tire, tireMat);
+        let t2 = new T.Mesh(tire, tireMat);
+        let t3 = new T.Mesh(tire, tireMat);
+        let t4 = new T.Mesh(tire, tireMat);
+        t1.rotateX(Math.PI / 2);
+        t2.rotateX(Math.PI / 2);
+        t3.rotateX(Math.PI / 2);
+        t4.rotateX(Math.PI / 2);
+        t1.translateX(1.21);
+        t2.translateX(0.51);
+        t3.translateX(-0.51);
+        t4.translateX(-1.21);
+        bus.add(t1, t2, t3, t4);
+        bus.translateY(0.21);
+        super(`Bus1`, bus);
+        this.bigCar = bus;
+        bus.scale.set(1.51, 1.51, 1.51);
+        bus.position.x = s / 10 + rs / 4 + 7;
+        bus.position.z = s / 5 + rs / 4;
+        this.turn = 3;
+        this.x = s / 5 + rs / 4;
+        this.z = s / 5 + rs / 4;
+
+        this.ridePoint = new T.Object3D();
+        this.ridePoint.translateY(2);
+        this.ridePoint.rotateY(Math.PI / 2);
+        this.objects[0].add(this.ridePoint);
+        this.rideable = this.ridePoint;
     }
 
-   
+    tick(time, timeOfDay) {
+        let v2 = time / 50;
+        switch (this.turn) {
+            case 0:
+                this.bigCar.translateX(v2);
+                this.z += v2;
+                if (this.z >= s / 5 + rs / 4) {
+                    this.turn = 1;
+                    this.bigCar.rotateY(-Math.PI / 2);
+                }
+                break;
+            case 1:
+                this.bigCar.translateX(v2);
+                this.x -= v2;
+                if (this.x <= -s / 5 - rs / 3) {
+                    this.turn = 2;
+                    this.bigCar.rotateY(-Math.PI / 2);
+                }
+                break;
+            case 2:
+                this.bigCar.translateX(v2);
+                this.z -= v2;
+                if (this.z <= -s / 5 - rs / 4) {
+                    this.turn = 3;
+                    this.bigCar.rotateY(-Math.PI / 2);
+                }
+                break;
+            case 3:
+                this.bigCar.translateX(v2);
+                this.x += v2;
+                if (this.x >= s / 5 + rs / 4) {
+                    this.turn = 0;
+                    this.bigCar.rotateY(-Math.PI / 2);
+                }
+                break;
+
+        }
+
+
+    }
+
+
 
 }
 
 
 export class GrBus2 extends GrObject {
     constructor() {
-		let bus = new T.Group();
-        
-        let front_group = new T.Group();
-		let front_geom = new T.BoxGeometry( 3.5, 1, 0.8 );
-		let front_mat = new T.MeshStandardMaterial({color:"#7de1e8", metalness:0.5, roughness:0.2});
-        let front = new T.Mesh(front_geom, front_mat);
-        let frontwin_geom = new T.BoxGeometry( 0.1, 0.5, 0.6 );
-		let win_mat = new T.MeshStandardMaterial({color:"black", metalness:0.9, roughness:0.2});
-        let front_window = new T.Mesh(frontwin_geom, win_mat);
-        let sidewin_geom = new T.BoxGeometry( 0.5, 0.4, 0.1 );
-        let side1_window = new T.Mesh(sidewin_geom, win_mat);
-        let side2_window = new T.Mesh(sidewin_geom, win_mat);
-        let side3_window = new T.Mesh(sidewin_geom, win_mat);
-        let side4_window = new T.Mesh(sidewin_geom, win_mat);
-        let side5_window = new T.Mesh(sidewin_geom, win_mat);
-        let side6_window = new T.Mesh(sidewin_geom, win_mat);
-        let side7_window = new T.Mesh(sidewin_geom, win_mat);
-        let side8_window = new T.Mesh(sidewin_geom, win_mat);
-        let ear_geom = new T.BoxGeometry( 0.1, 0.3, 0.2 );
-		let ear_mat = new T.MeshStandardMaterial({color:"white", metalness:0.3, roughness:0.2});
-        let ear1 = new T.Mesh(ear_geom, ear_mat);
-        let ear2 = new T.Mesh(ear_geom, ear_mat);
-        let sidewindows = new T.Group();
-        side1_window.translateZ(0.36);
-        side2_window.translateZ(-0.36);
-        side3_window.translateZ(0.36);
-        side4_window.translateZ(-0.36);
-        side5_window.translateZ(0.36);
-        side6_window.translateZ(-0.36);
-        side7_window.translateZ(0.36);
-        side8_window.translateZ(-0.36);
-        side1_window.translateX(-0.2);
-        side2_window.translateX(-0.2);
-        side3_window.translateX(0.5);
-        side4_window.translateX(0.5);
-        side5_window.translateX(1.1);
-        side6_window.translateX(1.1);
-        side7_window.translateX(-0.8);
-        side8_window.translateX(-0.8);
-        ear1.translateZ(0.4);
-        ear2.translateZ(-0.4);
-        ear1.translateX(1.6);
-        ear2.translateX(1.6);
-        ear1.translateY(0.1);
-        ear2.translateY(0.1);
-        front_window.translateX(1.71);
-        front_window.translateY(0.1);
-        sidewindows.add(side1_window,side2_window,side3_window,side4_window,side5_window,side6_window,side7_window,side8_window);
-        front_group.add(front,front_window,ear1,ear2,sidewindows);
-        sidewindows.translateY(0.1);
-        front_group.translateY(0.4);
-        bus.add(front_group);
+        let bus = new T.Group();
 
-        let wheel_geom = new T.CylinderGeometry( 0.2, 0.2, 1, 32 );
-        let wheel_mat = new T.MeshStandardMaterial({color:"black", metalness:0.3, roughness:0.8});
-        let wheel1 = new T.Mesh(wheel_geom, wheel_mat);
-        let wheel2 = new T.Mesh(wheel_geom, wheel_mat);
-        let wheel3 = new T.Mesh(wheel_geom, wheel_mat);
-        let wheel4 = new T.Mesh(wheel_geom, wheel_mat);
-        wheel1.rotateX(Math.PI/2);
-        wheel2.rotateX(Math.PI/2);
-        wheel3.rotateX(Math.PI/2);
-        wheel4.rotateX(Math.PI/2);
-        wheel1.translateX(1.2);
-        wheel2.translateX(0.5);
-        wheel3.translateX(-0.5);
-        wheel4.translateX(-1.2);
-        bus.add(wheel1,wheel2,wheel3,wheel4);
+        let fg = new T.Group();
+        let fgg = new T.BoxGeometry(3.51, 1.1, 0.81);
+        let fm = new T.MeshStandardMaterial({ color: "#7de1e8", metalness: 0.5, roughness: 0.2 });
+        let fmesh = new T.Mesh(fgg, fm);
+        let fwg = new T.BoxGeometry(0.11, 0.51, 0.61);
+        let wm = new T.MeshStandardMaterial({ color: "black", metalness: 0.9, roughness: 0.2 });
+        let frw = new T.Mesh(fwg, wm);
+        let geo2 = new T.BoxGeometry(0.51, 0.41, 0.11);
+        let comb2 = new T.Mesh(geo2, wm);
+        let mesh2 = new T.Mesh(geo2, wm);
+        let s3 = new T.Mesh(geo2, wm);
+        let s4 = new T.Mesh(geo2, wm);
+        let s5 = new T.Mesh(geo2, wm);
+        let s6 = new T.Mesh(geo2, wm);
+        let s7 = new T.Mesh(geo2, wm);
+        let s8 = new T.Mesh(geo2, wm);
+        let box3 = new T.BoxGeometry(0.11, 0.31, 0.21);
+        let mesh3 = new T.MeshStandardMaterial({ color: "white", metalness: 0.3, roughness: 0.2 });
+        let e1 = new T.Mesh(box3, mesh3);
+        let e2 = new T.Mesh(box3, mesh3);
+        let newG = new T.Group();
+        comb2.translateZ(0.362);
+        mesh2.translateZ(-0.362);
+        s3.translateZ(0.362);
+        s4.translateZ(-0.362);
+        s5.translateZ(0.362);
+        s6.translateZ(-0.362);
+        s7.translateZ(0.362);
+        s8.translateZ(-0.362);
+        comb2.translateX(-0.22);
+        mesh2.translateX(-0.22);
+        s3.translateX(0.52);
+        s4.translateX(0.52);
+        s5.translateX(1.12);
+        s6.translateX(1.12);
+        s7.translateX(-0.82);
+        s8.translateX(-0.82);
+        e1.translateZ(0.42);
+        e2.translateZ(-0.42);
+        e1.translateX(1.62);
+        e2.translateX(1.62);
+        e1.translateY(0.12);
+        e2.translateY(0.12);
+        frw.translateX(1.712);
+        frw.translateY(0.12);
+        newG.add(comb2, mesh2, s3, s4, s5, s6, s7, s8);
+        fg.add(fmesh, frw, e1, e2, newG);
+        newG.translateY(0.11);
+        fg.translateY(0.41);
+        bus.add(fg);
+
+        let tire = new T.CylinderGeometry(0.22, 0.22, 1.2, 32);
+        let tireMat = new T.MeshStandardMaterial({ color: "black", metalness: 0.3, roughness: 0.8 });
+        let t1 = new T.Mesh(tire, tireMat);
+        let t2 = new T.Mesh(tire, tireMat);
+        let t3 = new T.Mesh(tire, tireMat);
+        let t4 = new T.Mesh(tire, tireMat);
+        t1.rotateX(Math.PI / 2);
+        t2.rotateX(Math.PI / 2);
+        t3.rotateX(Math.PI / 2);
+        t4.rotateX(Math.PI / 2);
+        t1.translateX(1.2);
+        t2.translateX(0.5);
+        t3.translateX(-0.5);
+        t4.translateX(-1.2);
+        bus.add(t1, t2, t3, t4);
 
         bus.translateY(0.2);
 
-        // bus.translateZ(-1);
-        // bus.translateX(-2);
-        super(`Purple Bus`,bus);
-        this.truck = bus;
-        bus.scale.set(1.5,1.5,1.5);
-        bus.position.x = -world_size/5 - road_size/4 ;
-        bus.position.z = -world_size/5 - road_size/4;
-        this.state = 3;
-        this.x = -world_size/5 - road_size/4;
-        this.z = -world_size/5 - road_size/4;
+        super(`Bus2`, bus);
+        this.bigCar = bus;
+        bus.scale.set(1.5, 1.5, 1.5);
+        bus.position.x = -s / 5 - rs / 4;
+        bus.position.z = -s / 5 - rs / 4;
+        this.turn = 3;
+        this.x = -s / 5 - rs / 4;
+        this.z = -s / 5 - rs / 4;
+
+        this.ridePoint = new T.Object3D();
+        this.ridePoint.translateY(2);
+        this.ridePoint.rotateY(Math.PI / 2);
+        this.objects[0].add(this.ridePoint);
+        this.rideable = this.ridePoint;
     }
 
-    
+    tick(time, timeOfDay) {
+        let v2 = time / 60;
+        switch (this.turn) {
+            case 0:
+                this.bigCar.translateX(v2);
+                this.z += v2;
+                if (this.z >= s / 5 + rs / 4) {
+                    this.turn = 1;
+                    this.bigCar.rotateY(-Math.PI / 2);
+                }
+                break;
+            case 1:
+                this.bigCar.translateX(v2);
+                this.x -= v2;
+                if (this.x <= -s / 5 - rs / 3) {
+                    this.turn = 2;
+                    this.bigCar.rotateY(-Math.PI / 2);
+                }
+                break;
+            case 2:
+                this.bigCar.translateX(v2);
+                this.z -= v2;
+                if (this.z <= -s / 5 - rs / 4) {
+                    this.turn = 3;
+                    this.bigCar.rotateY(-Math.PI / 2);
+                }
+                break;
+            case 3:
+                this.bigCar.translateX(v2);
+                this.x += v2;
+                if (this.x >= s / 5 + rs / 4) {
+                    this.turn = 0;
+                    this.bigCar.rotateY(-Math.PI / 2);
+                }
+                break;
+
+        }
+    }
 
 }
 
 
 export class GrCar1 extends GrObject {
-    constructor(params={}) {
-		let car = new T.Group();
-        
-		let base_geom = new T.BoxGeometry( 2.1, 0.3, 0.8 );
-		let base_mat = new T.MeshStandardMaterial({color:"#a8e87d", metalness:0.1, roughness:0.2});
-        let base = new T.Mesh(base_geom, base_mat);
-        let top = new T.Group();
+    constructor(params = {}) {
+        let smallCar = new T.Group();
 
-        let top1_geometry = new T.Geometry();
-        top1_geometry.vertices = [
-            new T.Vector3( -0.3, 0, 0 ),//0
-            new T.Vector3( 1, 0, 0 ),//1
-            new T.Vector3( 1, 0, 0.8),//2
-            new T.Vector3( -0.3, 0, 0.8 ),//3
-            new T.Vector3( 1/4-0.2, 0.5, 0.8 ),//4
-            new T.Vector3( 3/4, 0.5, 0.8 ),//5
-            new T.Vector3( 3/4, 0.5, 0 ),//6
-            new T.Vector3( 1/4-0.2, 0.5, 0 )//7
-        ];
-        top1_geometry.faces = [
-            new T.Face3( 3, 2, 5 ),
-            new T.Face3( 3, 5, 4 ),
-            new T.Face3( 2, 1, 6 ),
-            new T.Face3( 2, 6, 5 ),
-            new T.Face3( 4, 5, 6 ),
-            new T.Face3( 4, 6, 7 ),
-            new T.Face3( 0, 3, 4 ),
-            new T.Face3( 0, 4, 7 ),
-            new T.Face3( 1, 0, 7 ),
-            new T.Face3( 1, 7, 6 )
-        ];
-		let top_mat = new T.MeshStandardMaterial({color:"white", metalness:0.2, roughness:0.2});
-        let top1 = new T.Mesh(top1_geometry, top_mat);
-        top.add(top1);
-        top1.translateZ(-0.4);
-        top.translateY(0.3);
-        top.translateX(0.2);
+        let box = new T.BoxGeometry(2.1, 0.3, 0.8);
+        let boxMat = new T.MeshStandardMaterial({ color: "#a8e87d", metalness: 0.1, roughness: 0.2 });
+        let mesh = new T.Mesh(box, boxMat);
+        let tGr = new T.Group();
 
-        let winfront_geometry = new T.Geometry();
-        winfront_geometry.vertices = [
-            new T.Vector3( -0.3+0.35/8, 0.5/4, 0.1 ),//0
-            new T.Vector3( -0.3+0.35/8, 0.5/4, 0.7 ),//1
-            new T.Vector3( 1/4-0.2-0.35/8, 0.5*7/8-0.01, 0.7 ),//2
-            new T.Vector3( 1/4-0.2-0.35/8, 0.5*7/8-0.01, 0.1 )//3
+        let tGeo = new T.Geometry();
+        tGeo.vertices = [
+            new T.Vector3(-0.3, 0, 0),
+            new T.Vector3(1, 0, 0),
+            new T.Vector3(1, 0, 0.8),
+            new T.Vector3(-0.3, 0, 0.8),
+            new T.Vector3(1 / 4 - 0.2, 0.5, 0.8),
+            new T.Vector3(3 / 4, 0.5, 0.8),
+            new T.Vector3(3 / 4, 0.5, 0),
+            new T.Vector3(1 / 4 - 0.2, 0.5, 0),
         ];
-        winfront_geometry.faces = [
-            new T.Face3( 0, 1, 2 ),
-            new T.Face3( 0, 2, 3 )
+        tGeo.faces = [
+            new T.Face3(3, 2, 5),
+            new T.Face3(3, 5, 4),
+            new T.Face3(2, 1, 6),
+            new T.Face3(2, 6, 5),
+            new T.Face3(4, 5, 6),
+            new T.Face3(4, 6, 7),
+            new T.Face3(0, 3, 4),
+            new T.Face3(0, 4, 7),
+            new T.Face3(1, 0, 7),
+            new T.Face3(1, 7, 6)
         ];
-		let win_mat = new T.MeshStandardMaterial({color:"white", metalness:0.5, roughness:0.2});
-        let front_window = new T.Mesh(winfront_geometry, win_mat);
-        front_window.translateX(-0.01);
-        front_window.translateZ(-0.4);
+        let tm = new T.MeshStandardMaterial({ color: "white", metalness: 0.8, roughness: 0.2 });
+        let top1 = new T.Mesh(tGeo, tm);
+        tGr.add(top1);
+        top1.translateZ(-0.41);
+        tGr.translateY(0.31);
+        tGr.translateX(0.21);
 
-        let winback_geometry = new T.Geometry();
-        winback_geometry.vertices = [
-            new T.Vector3( 1-(1/4)*1/5, 0.1, 0.1 ),//0
-            new T.Vector3( 1-(1/4)*1/5, 0.1, 0.7),//1
-            new T.Vector3( 3/4+(1/4)*1/5, 0.4, 0.7 ),//2
-            new T.Vector3( 3/4+(1/4)*1/5, 0.4, 0.1 )//3
+        let wfGeo = new T.Geometry();
+        wfGeo.vertices = [
+            new T.Vector3(-0.3 + 0.35 / 8, 0.5 / 4, 0.1),
+            new T.Vector3(-0.3 + 0.35 / 8, 0.5 / 4, 0.7),
+            new T.Vector3(1 / 4 - 0.2 - 0.35 / 8, 0.5 * 7 / 8 - 0.01, 0.7),
+            new T.Vector3(1 / 4 - 0.2 - 0.35 / 8, 0.5 * 7 / 8 - 0.01, 0.1)
         ];
-        winback_geometry.faces = [
-            new T.Face3( 1, 0, 3 ),
-            new T.Face3( 1, 3, 2 )
+        wfGeo.faces = [
+            new T.Face3(0, 1, 2),
+            new T.Face3(0, 2, 3)
         ];
-        let back_window = new T.Mesh(winback_geometry, win_mat);
-        back_window.translateX(0.01);
-        back_window.translateZ(-0.4);
+        let wm = new T.MeshStandardMaterial({ color: "white", metalness: 0.5, roughness: 0.2 });
+        let frw = new T.Mesh(wfGeo, wm);
+        frw.translateX(-0.01);
+        frw.translateZ(-0.4);
 
-        let sidewin_geom = new T.BoxGeometry( 0.45, 0.3, 0.1 );
-        let side1_window = new T.Mesh(sidewin_geom, win_mat);
-        let side2_window = new T.Mesh(sidewin_geom, win_mat);
-        side1_window.translateZ(0.351);
-        side2_window.translateZ(-0.351);
-        side1_window.translateY(0.25);
-        side2_window.translateY(0.25);
-        side1_window.translateX(0.3);
-        side2_window.translateX(0.3);
-
-        top.add(front_window,back_window,side1_window,side2_window);
-        car.add(base, top);
-        base.rotation.y = Math.PI;
-        top.rotation.y = Math.PI;
-        base.translateY(0.2);
-
-        let wheel_geom = new T.CylinderGeometry( 0.2, 0.2, 1, 32 );
-        let wheel_mat = new T.MeshStandardMaterial({color:"black", metalness:0.3, roughness:0.8});
-        let wheel1 = new T.Mesh(wheel_geom, wheel_mat);
-        let wheel2 = new T.Mesh(wheel_geom, wheel_mat);
-        wheel1.rotateX(Math.PI/2);
-        wheel2.rotateX(Math.PI/2);
-        wheel1.translateX(-0.5);
-        wheel2.translateX(0.5);
+        let wbGeo = new T.Geometry();
+        wbGeo.vertices = [
+            new T.Vector3(1 - (1 / 4) * 1 / 5, 0.1, 0.1),
+            new T.Vector3(1 - (1 / 4) * 1 / 5, 0.1, 0.7),
+            new T.Vector3(3 / 4 + (1 / 4) * 1 / 5, 0.4, 0.7),
+            new T.Vector3(3 / 4 + (1 / 4) * 1 / 5, 0.4, 0.1)
+        ];
+        wbGeo.faces = [
+            new T.Face3(1, 0, 3),
+            new T.Face3(1, 3, 2)
+        ];
+        let bww = new T.Mesh(wbGeo, wm);
+        bww.translateX(0.011);
+        bww.translateZ(-0.41);
+        let geo2 = new T.BoxGeometry(0.45, 0.3, 0.1);
+        let comb2 = new T.Mesh(geo2, wm);
+        let mesh2 = new T.Mesh(geo2, wm);
+        comb2.translateZ(0.351);
+        mesh2.translateZ(-0.351);
+        comb2.translateY(0.25);
+        mesh2.translateY(0.25);
+        comb2.translateX(0.3);
+        mesh2.translateX(0.3);
+        tGr.add(frw, bww, comb2, mesh2);
+        smallCar.add(mesh, tGr);
+        mesh.rotation.y = Math.PI;
+        tGr.rotation.y = Math.PI;
+        mesh.translateY(0.21);
+        let tire = new T.CylinderGeometry(0.21, 0.21, 1, 32);
+        let tireMat = new T.MeshStandardMaterial({ color: "silver", metalness: 0.8, roughness: 0.8 });
+        let t1 = new T.Mesh(tire, tireMat);
+        let t2 = new T.Mesh(tire, tireMat);
+        t1.rotateX(Math.PI / 2);
+        t2.rotateX(Math.PI / 2);
+        t1.translateX(-0.5);
+        t2.translateX(0.5);
         let wheels_group = new T.Group();
-        wheels_group.add(wheel1,wheel2);
-        car.add(wheels_group);
-        
+        wheels_group.add(t1, t2);
+        smallCar.add(wheels_group);
+        smallCar.translateY(0.21);
+        let scale = 1.51;
+        smallCar.scale.set(scale, scale, scale);
+        super(`Car1`, smallCar);
+        this.bigCar = smallCar;
+        smallCar.position.x = -s / 5 + rs / 4;
+        smallCar.position.z = s / 5 - rs / 4;
+        this.turn = 0;
+        this.x = -s / 5 + rs / 4;
+        this.z = s / 5 - rs / 4;
+        this.ridePoint = new T.Object3D();
+        this.ridePoint.translateY(2);
+        this.ridePoint.rotateY(Math.PI / 2);
+        this.objects[0].add(this.ridePoint);
+        this.rideable = this.ridePoint;
 
-        car.translateY(0.2);
-        let scale = 1.5;
-        car.scale.set(scale,scale,scale);
-
-        super(`White Car`,car);
-        this.truck = car;
-        car.position.x = -world_size/5 + road_size/4 ;//+ (world_size/5)*params.num/10;
-        car.position.z = world_size/5 - road_size/4;
-        this.state = 0;
-        this.x = -world_size/5 + road_size/4 ;//+ (world_size/5)*params.num/10;
-        this.z = world_size/5 - road_size/4;
     }
 
-   
+    tick(time, timeOfDay) {
+        let run = time / 40;
+        switch (this.turn) {
+            case 0:
+                this.bigCar.translateX(run);
+                this.z -= run;
+                if (this.z <= -s / 5 + rs / 4) {
+                    this.turn = 1;
+                    this.bigCar.rotateY(Math.PI / 2);
+                }
+                break;
+            case 1:
+                this.bigCar.translateX(run);
+                this.x += run;
+                if (this.x >= s / 5 - rs / 4) {
+                    this.turn = 2;
+                    this.bigCar.rotateY(Math.PI / 2);
+                }
+                break;
+            case 2:
+                this.bigCar.translateX(run);
+                this.z += run;
+                if (this.z >= s / 5 - rs / 4) {
+                    this.turn = 3;
+                    this.bigCar.rotateY(Math.PI / 2);
+                }
+                break;
+            case 3:
+                this.bigCar.translateX(run);
+                this.x -= run;
+                if (this.x <= -s / 5 + rs / 3) {
+                    this.turn = 0;
+                    this.bigCar.rotateY(Math.PI / 2);
+                }
+                break;
+
+        }
+
+
+
+    }
+
 
 }
 
 
 export class GrCar2 extends GrObject {
     constructor() {
-		let car = new T.Group();
-        
-		let base_geom = new T.BoxGeometry( 2.1, 0.3, 0.8 );
-		let base_mat = new T.MeshStandardMaterial({color:"yellow", metalness:0.5, roughness:0.2});
-        let base = new T.Mesh(base_geom, base_mat);
-        let top = new T.Group();
-
-        let top1_geometry = new T.Geometry();
-        top1_geometry.vertices = [
-            new T.Vector3( -0.3, 0, 0 ),//0
-            new T.Vector3( 1, 0, 0 ),//1
-            new T.Vector3( 1, 0, 0.8),//2
-            new T.Vector3( -0.3, 0, 0.8 ),//3
-            new T.Vector3( 1/4-0.2, 0.5, 0.8 ),//4
-            new T.Vector3( 3/4, 0.5, 0.8 ),//5
-            new T.Vector3( 3/4, 0.5, 0 ),//6
-            new T.Vector3( 1/4-0.2, 0.5, 0 )//7
+        let smallCar = new T.Group();
+        let box = new T.BoxGeometry(2.11, 0.31, 0.81);
+        let boxMat = new T.MeshStandardMaterial({ color: "yellow", metalness: 0.5, roughness: 0.2 });
+        let mesh = new T.Mesh(box, boxMat);
+        let tGr = new T.Group();
+        let tGeo = new T.Geometry();
+        tGeo.vertices = [
+            new T.Vector3(-0.3, 0, 0),
+            new T.Vector3(1, 0, 0),
+            new T.Vector3(1, 0, 0.8),
+            new T.Vector3(-0.3, 0, 0.8),
+            new T.Vector3(1 / 4 - 0.2, 0.5, 0.8),
+            new T.Vector3(3 / 4, 0.5, 0.8),
+            new T.Vector3(3 / 4, 0.5, 0),
+            new T.Vector3(1 / 4 - 0.2, 0.5, 0)
         ];
-        top1_geometry.faces = [
-            new T.Face3( 3, 2, 5 ),
-            new T.Face3( 3, 5, 4 ),
-            new T.Face3( 2, 1, 6 ),
-            new T.Face3( 2, 6, 5 ),
-            new T.Face3( 4, 5, 6 ),
-            new T.Face3( 4, 6, 7 ),
-            new T.Face3( 0, 3, 4 ),
-            new T.Face3( 0, 4, 7 ),
-            new T.Face3( 1, 0, 7 ),
-            new T.Face3( 1, 7, 6 )
+        tGeo.faces = [
+            new T.Face3(3, 2, 5),
+            new T.Face3(3, 5, 4),
+            new T.Face3(2, 1, 6),
+            new T.Face3(2, 6, 5),
+            new T.Face3(4, 5, 6),
+            new T.Face3(4, 6, 7),
+            new T.Face3(0, 3, 4),
+            new T.Face3(0, 4, 7),
+            new T.Face3(1, 0, 7),
+            new T.Face3(1, 7, 6)
         ];
-		let top_mat = new T.MeshStandardMaterial({color:"yellow", metalness:0.2, roughness:0.2});
-        let top1 = new T.Mesh(top1_geometry, top_mat);
-        top.add(top1);
-        top1.translateZ(-0.4);
-        top.translateY(0.3);
-        top.translateX(0.3);
-
-        let winfront_geometry = new T.Geometry();
-        winfront_geometry.vertices = [
-            new T.Vector3( -0.3+0.35/8, 0.5/4, 0.1 ),//0
-            new T.Vector3( -0.3+0.35/8, 0.5/4, 0.7 ),//1
-            new T.Vector3( 1/4-0.2-0.35/8, 0.5*7/8-0.01, 0.7 ),//2
-            new T.Vector3( 1/4-0.2-0.35/8, 0.5*7/8-0.01, 0.1 )//3
+        let tm = new T.MeshStandardMaterial({ color: "yellow", metalness: 0.2, roughness: 0.2 });
+        let top1 = new T.Mesh(tGeo, tm);
+        tGr.add(top1);
+        top1.translateZ(-0.41);
+        tGr.translateY(0.31);
+        tGr.translateX(0.31);
+        let wfGeo = new T.Geometry();
+        wfGeo.vertices = [
+            new T.Vector3(-0.3 + 0.35 / 8, 0.5 / 4, 0.1),
+            new T.Vector3(-0.3 + 0.35 / 8, 0.5 / 4, 0.7),
+            new T.Vector3(1 / 4 - 0.2 - 0.35 / 8, 0.5 * 7 / 8 - 0.01, 0.7),
+            new T.Vector3(1 / 4 - 0.2 - 0.35 / 8, 0.5 * 7 / 8 - 0.01, 0.1)
         ];
-        winfront_geometry.faces = [
-            new T.Face3( 0, 1, 2 ),
-            new T.Face3( 0, 2, 3 )
+        wfGeo.faces = [
+            new T.Face3(0, 1, 2),
+            new T.Face3(0, 2, 3)
         ];
-		let win_mat = new T.MeshStandardMaterial({color:"black", metalness:0.5, roughness:0.2});
-        let front_window = new T.Mesh(winfront_geometry, win_mat);
-        front_window.translateX(-0.01);
-        front_window.translateZ(-0.4);
+        let wm = new T.MeshStandardMaterial({ color: "silver", metalness: 0.7, roughness: 0.2 });
+        let frw = new T.Mesh(wfGeo, wm);
+        frw.translateX(-0.011);
+        frw.translateZ(-0.41);
 
-        let winback_geometry = new T.Geometry();
-        winback_geometry.vertices = [
-            new T.Vector3( 1-(1/4)*1/5, 0.1, 0.1 ),//0
-            new T.Vector3( 1-(1/4)*1/5, 0.1, 0.7),//1
-            new T.Vector3( 3/4+(1/4)*1/5, 0.4, 0.7 ),//2
-            new T.Vector3( 3/4+(1/4)*1/5, 0.4, 0.1 )//3
+        let wbGeo = new T.Geometry();
+        wbGeo.vertices = [
+            new T.Vector3(1 - (1 / 4) * 1 / 5, 0.1, 0.1),
+            new T.Vector3(1 - (1 / 4) * 1 / 5, 0.1, 0.7),
+            new T.Vector3(3 / 4 + (1 / 4) * 1 / 5, 0.4, 0.7),
+            new T.Vector3(3 / 4 + (1 / 4) * 1 / 5, 0.4, 0.1)
         ];
-        winback_geometry.faces = [
-            new T.Face3( 1, 0, 3 ),
-            new T.Face3( 1, 3, 2 )
+        wbGeo.faces = [
+            new T.Face3(1, 0, 3),
+            new T.Face3(1, 3, 2)
         ];
-        let back_window = new T.Mesh(winback_geometry, win_mat);
-        back_window.translateX(0.01);
-        back_window.translateZ(-0.4);
+        let bww = new T.Mesh(wbGeo, wm);
+        bww.translateX(0.011);
+        bww.translateZ(-0.41);
 
-        let sidewin_geom = new T.BoxGeometry( 0.45, 0.3, 0.1 );
-        let side1_window = new T.Mesh(sidewin_geom, win_mat);
-        let side2_window = new T.Mesh(sidewin_geom, win_mat);
-        side1_window.translateZ(0.351);
-        side2_window.translateZ(-0.351);
-        side1_window.translateY(0.25);
-        side2_window.translateY(0.25);
-        side1_window.translateX(0.3);
-        side2_window.translateX(0.3);
-
-        top.add(front_window,back_window,side1_window,side2_window);
-        base.translateY(0.2);
-
-        let wheel_geom = new T.CylinderGeometry( 0.2, 0.2, 1, 32 );
-        let wheel_mat = new T.MeshStandardMaterial({color:"black", metalness:0.3, roughness:0.8});
-        let wheel1 = new T.Mesh(wheel_geom, wheel_mat);
-        let wheel2 = new T.Mesh(wheel_geom, wheel_mat);
-        wheel1.rotateX(Math.PI/2);
-        wheel2.rotateX(Math.PI/2);
-        wheel1.translateX(-0.5);
-        wheel2.translateX(0.5);
-        car.add(base, top, wheel1,wheel2);
-        car.translateY(0.2);
-        
-        base.rotation.y = Math.PI;
-        top.rotation.y = Math.PI;
-
-        let scale = 1.5;
-        car.scale.set(scale,scale,scale);
-        car.translateY(0.2);
-
-        super(`Yellow Car`,car);
-        this.truck = car;
-        
-        car.position.x = 0 ;
-        car.position.z = world_size/5 - road_size/4;
-        this.state = 3;
+        let geo2 = new T.BoxGeometry(0.451, 0.31, 0.11);
+        let comb2 = new T.Mesh(geo2, wm);
+        let mesh2 = new T.Mesh(geo2, wm);
+        comb2.translateZ(0.351);
+        mesh2.translateZ(-0.351);
+        comb2.translateY(0.251);
+        mesh2.translateY(0.251);
+        comb2.translateX(0.31);
+        mesh2.translateX(0.31);
+        tGr.add(frw, bww, comb2, mesh2);
+        mesh.translateY(0.21);
+        let tire = new T.CylinderGeometry(0.21, 0.21, 1, 32);
+        let tireMat = new T.MeshStandardMaterial({ color: "blsilverack", metalness: 0.7, roughness: 0.8 });
+        let t1 = new T.Mesh(tire, tireMat);
+        let t2 = new T.Mesh(tire, tireMat);
+        t1.rotateX(Math.PI / 2);
+        t2.rotateX(Math.PI / 2);
+        t1.translateX(-0.51);
+        t2.translateX(0.51);
+        smallCar.add(mesh, tGr, t1, t2);
+        smallCar.translateY(0.21);
+        mesh.rotation.y = Math.PI;
+        tGr.rotation.y = Math.PI;
+        let scale = 1.51;
+        smallCar.scale.set(scale, scale, scale);
+        smallCar.translateY(0.21);
+        super(`Car2`, smallCar);
+        this.bigCar = smallCar;
+        smallCar.position.x = 0;
+        smallCar.position.z = s / 5 - rs / 4;
+        this.turn = 3;
         this.x = 0;
-        this.z = world_size/5 - road_size/4;
-    }  
+        this.z = s / 5 - rs / 4;
+        this.ridePoint = new T.Object3D();
+        this.ridePoint.translateY(2);
+        this.ridePoint.rotateY(Math.PI / 2);
+        this.objects[0].add(this.ridePoint);
+        this.rideable = this.ridePoint;
 
-}
-
-
-
-export class GrBus extends GrObject {
-    constructor() {
-		let vehicleModel = new T.Group();
-        let rearModel = new T.Group();
-        let sidewindows = new T.Group();
-
-        // setting up the car 
-		let rearGeometry = new T.BoxGeometry( 4.5, 1, 0.8 );
-		let rearmaterial = new T.MeshStandardMaterial({color:"#ebc034", metalness:0.6, roughness:0.8});
-        let rearMesh = new T.Mesh(rearGeometry, rearmaterial);
-
-        let frontLight = new T.CircleGeometry(2, 50);
-        let lightMaterial = new T.MeshStandardMaterial({color:"white", metalness:0.6, roughness:0.8});
-        let lightmesh = new T.Mesh(frontLight, lightMaterial);
-       
-        // setting up the front window 
-        let rearWindowGeo = new T.BoxGeometry( 0.1, 0.5, 0.7 );
-        rearWindowGeo.translate(0.5,0,0);
-        let windowMaterial = new T.MeshStandardMaterial({color:"white", metalness:0.8, roughness:0.9});
-        let rearwindowMesh = new T.Mesh(rearWindowGeo, windowMaterial);
-
-        // setting up the side windows 
-        let sideWindowGeo = new T.BoxGeometry( 0.5, 0.5, 0.1 );
-        let first = new T.Mesh(sideWindowGeo, windowMaterial);
-        let second = new T.Mesh(sideWindowGeo, windowMaterial);
-        let third = new T.Mesh(sideWindowGeo, windowMaterial);
-        let fourth = new T.Mesh(sideWindowGeo, windowMaterial);
-        let fifth = new T.Mesh(sideWindowGeo, windowMaterial);
-        let sixth = new T.Mesh(sideWindowGeo, windowMaterial);
-        let seventh = new T.Mesh(sideWindowGeo, windowMaterial);
-        let eightth = new T.Mesh(sideWindowGeo, windowMaterial);
-        
-        let driverMirror = new T.BoxGeometry( 0.3, 0.5, 0.1 );
-        let ninth = new T.Mesh(driverMirror, windowMaterial);
-        let tenth = new T.Mesh(driverMirror, windowMaterial);
-
-        let eleven = new T.Mesh(sideWindowGeo, windowMaterial);
-        let twelve = new T.Mesh(sideWindowGeo, windowMaterial);
-
-
-        // setting up the mirror 
-        let mirror = new T.BoxGeometry( 0.1, 0.4, 0.25 );
-		let mirrorMaterial = new T.MeshStandardMaterial({color:"white", metalness:0.9, roughness:0.2});
-        let leftMirror = new T.Mesh(mirror, mirrorMaterial);
-        let secondMirror = new T.Mesh(mirror, mirrorMaterial);
-       
-        // translate z axis 
-        first.translateZ(0.355);
-        second.translateZ(-0.355);
-        third.translateZ(0.355);
-        fourth.translateZ(-0.355);
-        fifth.translateZ(0.355);
-        sixth.translateZ(-0.355);
-        seventh.translateZ(0.355);
-        eightth.translateZ(-0.355);
-        ninth.translateZ(0.355);
-        tenth.translateZ(-0.355);
-        eleven.translateZ(0.355);
-        twelve.translateZ(-0.355);
-        // translate x axis
-        first.translateX(-0.1);
-        second.translateX(-0.1);
-        
-        third.translateX(0.5);
-        fourth.translateX(0.5);
-        
-        fifth.translateX(1.1);
-        sixth.translateX(1.1);
-
-        seventh.translateX(-0.7);
-        eightth.translateX(-0.7);
-        ninth.translateX(1.9);
-        tenth.translateX(1.9);
-
-        eleven.translateX(-1.4);
-        twelve.translateX(-1.4);
-
-        leftMirror.translateZ(0.35);
-        secondMirror.translateZ(-0.35);
-
-        leftMirror.translateX(2.15);
-        secondMirror.translateX(2.15);
-
-        leftMirror.translateY(0.2);
-        secondMirror.translateY(0.2);
-
-        rearwindowMesh.translateX(1.72);
-        rearwindowMesh.translateY(0.15);
-
-        sidewindows.add(first,second,third,fourth,fifth,sixth,seventh,eightth, ninth, tenth, eleven, twelve);
-        rearModel.add(rearMesh,rearwindowMesh,leftMirror,secondMirror,sidewindows);
-        sidewindows.translateY(0.1);
-        rearModel.translateY(0.4);
-        vehicleModel.add(rearModel);
-
-        let tireGeo = new T.CylinderGeometry( 0.25, 0.25, 0.9, 50);
-        let tirematerial = new T.MeshStandardMaterial({color:"black", metalness:0.9, roughness:0.8});
-        let tire1 = new T.Mesh(tireGeo, tirematerial);
-        let tire2 = new T.Mesh(tireGeo, tirematerial);
-        let tire3 = new T.Mesh(tireGeo, tirematerial);
-        let tire4 = new T.Mesh(tireGeo, tirematerial);
-        let tire5 = new T.Mesh(tireGeo, tirematerial);
-        let tire6 = new T.Mesh(tireGeo, tirematerial);
-
-        tire1.rotateX(Math.PI/2);
-        tire2.rotateX(Math.PI/2);
-        tire3.rotateX(Math.PI/2);
-        tire4.rotateX(Math.PI/2);
-        tire5.rotateX(Math.PI/2);
-        tire6.rotateX(Math.PI/2);
-
-        tire1.translateX(1.2);
-        tire2.translateX(0.5);
-        tire3.translateX(-0.5);
-        tire4.translateX(-1.2);
-        tire5.translateX(-1.8);
-        tire6.translateX(1.8);
-        vehicleModel.add(tire1,tire2,tire3,tire4,tire5, tire6);
-        vehicleModel.translateY(0.2);
-        super(`bus`,vehicleModel);
     }
 
-   
-    
+    tick(time, timeOfDay) {
+        let run = time / 40;
+        switch (this.turn) {
+            case 0:
+                this.bigCar.translateX(run);
+                this.z -= run;
+                if (this.z <= -s / 5 + rs / 4) {
+                    this.turn = 1;
+                    this.bigCar.rotateY(Math.PI / 2);
+                }
+                break;
+            case 1:
+                this.bigCar.translateX(run);
+                this.x += run;
+                if (this.x >= s / 5 - rs / 4) {
+                    this.turn = 2;
+                    this.bigCar.rotateY(Math.PI / 2);
+                }
+                break;
+            case 2:
+                this.bigCar.translateX(run);
+                this.z += run;
+                if (this.z >= s / 5 - rs / 4) {
+                    this.turn = 3;
+                    this.bigCar.rotateY(Math.PI / 2);
+                }
+                break;
+            case 3:
+                this.bigCar.translateX(run);
+                this.x -= run;
+                if (this.x <= -s / 5 + rs / 3) {
+                    this.turn = 0;
+                    this.bigCar.rotateY(Math.PI / 2);
+                }
+                break;
 
+        }
+
+
+
+    }
 }
+
+
+
