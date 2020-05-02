@@ -11,3 +11,5 @@ You may place up to 4 additional pictures that show off specific features.
 
 ![overview3](https://user-images.githubusercontent.com/52982585/80854717-23660a80-8c00-11ea-9d04-07e8f4444356.jpg)
 
+2. Park
+![park](https://user-images.githubusercontent.com/52982585/80855213-e2242980-8c04-11ea-94d3-898daed3b339.jpg)
