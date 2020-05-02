@@ -22,6 +22,7 @@ Features:
 6. Train track on a high-lifted bridge 
 7. A train 
 8. Helicopter and Helipad (I used the code from the example)
+9. Beautiful Skybox 
 
 
 ## Straightforward Checks
@@ -62,7 +63,7 @@ Note: the other checks we can see easily.
 
 8. One object from each category
     - buildings: Apartment buildings, skyscraper, private homes 
-    - natural elements: trees,
+    - natural elements: trees
     - vehicles: bus, truck, train, cars
 
 9. There is at least one model loaded from a file. (e.g. loading a `.obj` or `.fbx` file)
