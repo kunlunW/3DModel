@@ -33,10 +33,10 @@ import { ShinySculpture } from "../examples/shinySculpture.js";
 import { MorphTest } from "../examples/morph.js";
 
 import {GrTruck, GrBus1, GrBus2, GrCar1, GrCar2} from "./cars.js";
-import {GrAvenue,GrBridge, GrShiny} from "./traffic.js";
+import {GrAvenue,GrBridge, GrShiny, HelicopterObject} from "./traffic.js";
 import {GrBuilding1, GrBuilding2, GrTree, GrHut, Building1, Building2, Building3, Building4, Building5, Building6} from "./buildings.js";
 
-import {GrTrain,draw} from "./train.js";
+import {GrTrain,draw, } from "./train.js";
 
 import {GrSwing,Grabout, GrCarousel2, GrFountain, Grfountain} from "./playGround.js"
 
@@ -147,6 +147,8 @@ function grtown() {
       house4.objects[0].rotateY(Math.PI/2);
       house4.objects[0].translateX(-2)
   }
+
+
 
 
 
@@ -341,69 +343,6 @@ world.add(new Helipad(-25,1.5,-25));
 
 
 
-
-    // let tree1 = new GrTree(30,0,15, 20);
-    // tree1.setScale(1.2,1.6,1.5)
-    // world.add(tree1);
-
-    // let tree2 = new GrTree(35,0,14, 10);
-    // tree2.setScale(1.1,1.3,1.5)
-    // world.add(tree2);
-
-    // let tree3 = new GrTree(40,0,13, 5);
-    // tree3.setScale(1.2,1.5,1.5)
-    // world.add(tree3);
-
-    // let tree4 = new GrTree(40,0,10, 8);
-    // tree4.setScale(1.3,2,1.5)
-    // world.add(tree4);
-
-    // let tree5 = new GrTree(43,0,7, 20);
-    // tree5.setScale(1.5,1.8,1.5)
-    // world.add(tree5);
-
-    // let tree6 = new GrTree(43,0, 3, 15);
-    // tree6.setScale(1.1,1.3,1.5)
-    // world.add(tree6);
-
-    // let tree7 = new GrTree(43,0, 0, 15);
-    // tree7.setScale(1,1,1)
-    // world.add(tree7);
-
-    // let tree8 = new GrTree(43,0, -3, 15);
-    // tree8.setScale(1.3,1.3,1.3)
-    // world.add(tree8);
-
-    // let tree9 = new GrTree(40,0, -5, 15);
-    // tree9.setScale(1,1.9,1.3)
-    // world.add(tree9);
-
-
-    // let tree10 = new GrTree(35,0, -8, 15);
-    // tree10.setScale(1,1.6,1.3)
-    // world.add(tree10);
-
-    // let tree11 = new GrTree(-30,0, -30, 20);
-    // tree11.setScale(1,2,1.3)
-    // world.add(tree11);
-
-    // let tree12 = new GrTree(-33,0, -30, 15);
-    // tree12.setScale(1,1.5,1.1)
-    // world.add(tree12);
-
-    // let tree13 = new GrTree(-37,0, -27, 15);
-    // tree13.setScale(1,1.8,1.1)
-    // world.add(tree13);
-    
-    // let tree14 = new GrTree(-35,0, -34, 15);
-    // tree14.setScale(1,1.8,1.1)
-    // world.add(tree14);
-
-    // let tree15 = new GrTree(-38,0, -34, 15);
-    // tree15.setScale(1,1.8,1.1)
-    // world.add(tree15);
-
-
     let i; let j;
    for (i =12; i>-21; i=i-5) {
      let tree = new GrTree(i,0,40,20);
@@ -547,6 +486,10 @@ bridge8.objects[0].translateY(7);
 bridge8.objects[0].position.x =-40;
 bridge8.objects[0].position.z =40;
 
+
+let heli1 = new HelicopterObject(-1);
+    world.add(heli1);
+    heli1.objects[0].scale.set(2,2,2);
 
   // only after all the objects exist can we build the UI
   // @ts-ignore       // we're sticking a new thing into the world
