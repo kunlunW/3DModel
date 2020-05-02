@@ -12,8 +12,8 @@ See README-example.md in the examples directory for ideas on what we are looking
 
 Describe what you were trying to make:
 
-Features:
 
+Features:
 1. Many trees! 
 2. 4 Apartment buildings with different textures. (With lightning rods on the roof of each of them)
 3. 3 different kinds of private houses, each with different textures and roof types
@@ -74,8 +74,8 @@ Note: the other checks we can see easily.
 
 10. There is at least one shader that you wrote.
     - what object is it on: A sphere 
-    - describe: I used this shader to minic the flowing water of a fountain 
-    - filename: 
+    - describe: I used this shader to make the sphere looks like water flowing out of the fountain  
+    - filename: fountain.fs / fountain.vs 
 
 12. SkyBox or some other texture (list one - and say why you didn't have skybox if you don't have one)
     1. I used a sunny mountain skybox theme
@@ -103,7 +103,8 @@ Note: put "####" (4 hash marks) and number the complex things to make it easier 
 
 #### Complex Thing 1:  The train and its track 
 Description: The track is made by creating a bezier curve with some control points, and the bridge is also built 
-based on the bezier curve. And the train is animated using the tick() function. 
+based on the bezier curve. And the train is animated using the tick() function. The Train car is made of complex 
+structure. 
 
 #### Complex Thing 2: The forests
 Description: The abundance of the forests might be the most obvious feature of my project. The forests in my project 
