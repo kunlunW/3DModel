@@ -22,6 +22,7 @@ Features:
 6. Train track on a high-lifted bridge 
 7. A train 
 8. Helicopter and Helipad (I used the code from the example)
+9. Beautiful Skybox 
 
 
 ## Straightforward Checks
@@ -62,7 +63,7 @@ Note: the other checks we can see easily.
 
 8. One object from each category
     - buildings: Apartment buildings, skyscraper, private homes 
-    - natural elements: trees,
+    - natural elements: trees
     - vehicles: bus, truck, train, cars
 
 9. There is at least one model loaded from a file. (e.g. loading a `.obj` or `.fbx` file)
@@ -119,12 +120,34 @@ Description: There are 4 apt buildings in graphics town, and each has different 
 
 
 ## Screenshots
+1. Graphics town overview: 
+![overview](https://user-images.githubusercontent.com/52982585/80853226-894c9500-8bf4-11ea-9f4e-996f120b719f.jpg)
+
+![overview2](https://user-images.githubusercontent.com/52982585/80853304-5eaf0c00-8bf5-11ea-9cb7-74452a76e200.jpg)
+
+2. Train car:
+![train](https://user-images.githubusercontent.com/52982585/80853276-25769c00-8bf5-11ea-8650-84fba5b58749.jpg)
+
+3. "Central Park" :
+![park](https://user-images.githubusercontent.com/52982585/80853359-cebd9200-8bf5-11ea-937c-73aa60d2aae0.jpg)
+
+4. Some private houses"
+![privateHome](https://user-images.githubusercontent.com/52982585/80853406-47245300-8bf6-11ea-9f65-8294d5404583.jpg)
+
+5. Some Apartment-Style buildings:
+![AptBuilding](https://user-images.githubusercontent.com/52982585/80853443-94a0c000-8bf6-11ea-8720-9dd132fa940d.jpg)
+
+6. A mega SkyScraper!: 
+![skyScraper](https://user-images.githubusercontent.com/52982585/80853511-214b7e00-8bf7-11ea-98b4-ba1844083f94.jpg)
 
 List the pictures that you made with a brief description
 
 ## Other Notes to the Graders
-
-The two OBJ objects I have in the graphics town make it very slow to load, and lagging. 
+Hi! There are a few things that I want to let you know: 
+1) The two OBJ objects I have in the graphics town make it very slow to load, and laggy. 
+2) For some reason, the textures and OBJ load very slowly on my computer, please wait a few second if you see building
+with no textures.
+3) If I run the graphics town, it will become very laggy, so I'd suggest you to unclick "run" if you want to examine things.
 
 ## Attributions (including self-attributions)
 
