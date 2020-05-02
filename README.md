@@ -127,8 +127,11 @@ Description: There are 4 apt buildings in graphics town, and each has different 
 2. Train car:
 ![train](https://user-images.githubusercontent.com/52982585/80853276-25769c00-8bf5-11ea-8650-84fba5b58749.jpg)
 
-3. "Central Park" 
+3. "Central Park" :
 ![park](https://user-images.githubusercontent.com/52982585/80853359-cebd9200-8bf5-11ea-937c-73aa60d2aae0.jpg)
+
+4. Some private houses"
+![privateHome](https://user-images.githubusercontent.com/52982585/80853406-47245300-8bf6-11ea-9f65-8294d5404583.jpg)
 
 List the pictures that you made with a brief description
 
