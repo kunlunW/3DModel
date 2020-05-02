@@ -119,6 +119,8 @@ Description: There are 4 apt buildings in graphics town, and each has different 
 
 
 ## Screenshots
+1. graphics town overview: 
+![overview](https://user-images.githubusercontent.com/52982585/80853226-894c9500-8bf4-11ea-9f4e-996f120b719f.jpg)
 
 List the pictures that you made with a brief description
 
