@@ -136,6 +136,9 @@ Description: There are 4 apt buildings in graphics town, and each has different 
 5. Some Apartment-Style buildings:
 ![AptBuilding](https://user-images.githubusercontent.com/52982585/80853443-94a0c000-8bf6-11ea-8720-9dd132fa940d.jpg)
 
+6. A mega SkyScraper!: 
+![skyScraper](https://user-images.githubusercontent.com/52982585/80853511-214b7e00-8bf7-11ea-98b4-ba1844083f94.jpg)
+
 List the pictures that you made with a brief description
 
 ## Other Notes to the Graders
