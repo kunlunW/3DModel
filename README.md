@@ -3,8 +3,6 @@
 Note: filling out this file is extremely important. If you don't describe your assignment here, we may not be able to give you points for things.
 
 - ** Name: Kunlun Wang ** 
-- ** GitHub ID: kunlunW** 
-- ** WiscID: 907 809 8895 **
 
 See README-example.md in the examples directory for ideas on what we are looking for.
 
