@@ -1,4 +1,4 @@
-# README.md file for Workbook 12
+# README.md
 
 Note: filling out this file is extremely important. If you don't describe your assignment here, we may not be able to give you points for things.
 
